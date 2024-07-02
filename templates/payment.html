@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2>Payment</h2>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ url_for('medicine_purchase')}}">Medicine Purchase</a></li>
+    <li class="breadcrumb-item"><a href="{{ url_for('add_purchase')}}">Add Purchase</a></li>
+    <li class="breadcrumb-item active">Payment</li>
+</ol>
+<div class="billing-summary">
+    <div class="bill-details">
+        <h2>Bill Details</h2>
+        <table border="1px solid" cellpadding="5" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Unit Cost</th>
+                    <th>Total Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ medicine_name }}</td>
+                    <td>{{ quantity }}</td>
+                    <td>{{ price_per_unit }}</td>
+                    <td>{{ total_cost }}</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td> Total Amount In Rupees: {{ total_cost }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+
+    <a>Total Cost in Ether: {{ total_cost_in_ether }} Ether</a>
+</div>
+<form
+    action="{{ url_for('payment', purchase_id=purchase_id, p_id=p_id,supplier_name=supplier_name, medicine_id=medicine_id, medicine_name=medicine_name, quantity=quantity, price_per_unit=price_per_unit, total_cost=total_cost, total_cost_in_ether=total_cost_in_ether) }}"
+    method="post">
+    <h2>Payment Form</h2>
+    <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" class="form-control" name="amount" placeholder="Amount"
+            value="{{ total_cost_in_ether }}" required>
+            {% if message %}
+            <a style="color:brown"> {{ message }} </a>
+        {% endif %}
+
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="recipient_address">Recipient Address:</label>
+        <input type="text" id="recipient_address" class="form-control" name="recipient_address"
+            placeholder="Recipient Address" required>
+    </div>
+    <br>
+    <button type="submit">Pay Now</button>
+</form>
+
+
+{% endblock body %}
+

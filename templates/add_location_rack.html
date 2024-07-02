@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2>Add Rack</h2>
+<ol class="breadcrumb mb-4"> 
+    <li class="breadcrumb-item"><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ url_for('location_rack')}}">Location Rack</a></li>
+    <li class="breadcrumb-item active">Add Rack</li>
+  </ol>
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="card-body">
+            <form class="row g-3" method="POST" action="{{ url_for('add_location_rack') }}">
+                <div class="col-md-6">
+                    <label for="rack_name" class="form-label">Rack Name</label>
+                    <input type="text" class="form-control" name="rack_name" placeholder="Rack Name"><br>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" value="Add Rack">Add Rack</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

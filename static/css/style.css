@@ -1,0 +1,188 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: right;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-family: var(--bs-body-font-family);
+    font-weight: var(--bs-body-font-weight);
+    font-size: calc(1.375rem + 1.5vw);
+    text-align: left;
+}
+
+form {
+    display: inline-block;
+}
+
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .flex-container > div {
+    width: 500px;
+    margin: 50px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 22px;
+  }
+
+.dashboard-box1 {
+    border: 1px solid #0d6efd;
+    background-color: #0d6efd;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.dashboard-box2 {
+    border: 1px solid #ff6207;
+    background-color: #ff6207;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.dashboard-box3 {
+    border: 1px solid #dc3545;
+    background-color: #dc3545;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.dashboard-box4 {
+    border: 1px solid darkgreen;
+    background-color: #198754;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+}
+
+.dashboard-item {
+    text-align: center;
+}
+
+.dashboard-title {
+    font-weight: bold;
+}
+
+.dashboard-value {
+    font-size: 2.0em;
+}
+
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.patient-info {
+    margin-bottom: 20px;
+}
+.bill-details {
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #888;
+}
+
+.bill-details table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.bill-details th, .bill-details td {
+  border: 1px solid #000; /* Add border to all cells */
+  padding: 8px; /* Add padding for better readability */
+}
+
+.bill-details th {
+  background-color: #f2f2f2; /* Add background color to header cells */
+  text-align: left; /* Align text to the left in header cells */
+}

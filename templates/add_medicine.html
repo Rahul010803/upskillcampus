@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2>Add Medicine</h2>
+<ol class="breadcrumb mb-4"> 
+    <li class="breadcrumb-item"><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ url_for('manage_medicines')}}">Medicine</a></li>
+    <li class="breadcrumb-item active">Add Medicine</li>
+  </ol>
+<div class="card mb-4">
+    <div class="card-header"> 
+        <div class="card-body">
+            <form class="row g-3" method="POST" action="{{ url_for('add_medicine') }}">
+                <div class="col-md-6">
+                    <label for="medicine_name" class="form-label">Medicine Name</label>
+                    <input type="text" class="form-control" name="medicine_name" placeholder="Medicine Name"><br>
+                </div>
+                <div class="col-md-6">
+                    <label for="company" class="form-label">Company</label>
+                    <select id="company" class="form-select" name="company">
+                        <option selected>Select Medicine Company</option>
+                        {% for company_row in companies %}
+                            {% for column_value in company_row %}
+                                <option value="{{ column_value }}">{{ column_value }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label for="pack_detail" class="form-label">Single Pack Quantity</label>
+                    <input type="number" class="form-control" name="pack_detail" placeholder="Single Pack Quantity"
+                        required><br>
+                </div>
+
+                <div class="col-6">
+                    <label for="category" class="form-label">Category</label>
+                    <select id="category" class="form-select" name="category">
+                        <option selected>Select Category</option>
+                        {% for category_row in categories %}
+                            {% for column_value in category_row %}
+                                <option value="{{ column_value }}">{{ column_value }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="location_rack" class="form-label">Location Rack</label>
+                    <select id="location_rack" class="form-select" name="location_rack">
+                        <option selected>Select Category</option>
+                        {% for category_row in racks %}
+                            {% for column_value in category_row %}
+                                <option value="{{ column_value }}">{{ column_value }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" value="Add Medicine">Add Medicine</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

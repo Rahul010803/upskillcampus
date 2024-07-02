@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h3>Dashboard</h3>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+<div id="dashboard" class="flex-container">
+    <div class="dashboard-box1">
+        <div class="dashboard-item">
+            <p class="dashboard-value">{{ medicines_in_stock }}</p>
+            <p class="dashboard-title">Medicines in Stock</p>
+        </div>
+    </div>
+    <div class="dashboard-box2">
+        <div class="dashboard-item">
+            <p class="dashboard-value">{{ medicines_out_of_stock }}</p>
+            <p class="dashboard-title">Medicines Out of Stock</p>
+        </div>
+    </div>
+    <div class="dashboard-box3">
+        <div class="dashboard-item">
+            <p class="dashboard-value">{{ total_purchases }}</p>
+            <p class="dashboard-title">Total Purchases</p>
+        </div>
+    </div>
+    <div class="dashboard-box4">
+        <div class="dashboard-item">
+            <p class="dashboard-value">{{ total_sales }}</p>
+            <p class="dashboard-title">Total Sales</p>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h3>List Of Medicines Out Of Stock</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Medicine Name</th>
+                <th>Category</th>
+                <th>Company</th>
+                <th>Single Pack Quantity</th>
+                <th>Available Quantity</th>
+                <th>Location Rack</th>
+                <th>Added On</th>
+                <th>Updated On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for medicine in medicines %}
+                <tr>
+                    <td>{{ medicine.medicine_name }}</td>
+                    <td>{{ medicine.category_name }}</td>
+                    <td>{{ medicine.company }}</td>
+                    <td>{{ medicine.single_pack_quantity }}</td>
+                    <td>{{ medicine.available_qty }}</td>
+                    <td>{{ medicine.location_rack }}</td>
+                    <td>{{ medicine.added_on }}</td>
+                    <td>{{ medicine.updated_on }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ url_for('add_purchase') }}" role="button">Add Purchase</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock body %}

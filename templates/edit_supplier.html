@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2>Edit Supplier</h2>
+<ol class="breadcrumb mb-4"> 
+    <li class="breadcrumb-item"><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ url_for('medicine_supplier')}}">Supplier Managment</a></li>
+    <li class="breadcrumb-item active">Edit Supplier</li>
+  </ol>
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="card-body">
+            <form class="row g-3" method="POST" action="{{ url_for('edit_supplier', supplier_id=supplier.supplier_id) }}">
+                <div class="col-md-6">
+                    <label for="supplier_name" class="form-label">Supplier Name</label>
+                    <input type="text" class="form-control" id="supplier_name" name="supplier_name" placeholder="Supplier Name" value="{{ supplier.supplier_name}}" ><br>
+                </div>
+                
+                <div class="col-6">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" name="address" placeholder="Address" value="{{ supplier.address}}"
+                        required><br>
+                </div>
+
+                <div class="col-6">
+                    <label for="contact_no" class="form-label">Contact No</label>
+                    <input type="text" class="form-control" name="contact_no" placeholder="Contact No" value="{{ supplier.contact_no}}"
+                        required><br>
+                </div>
+
+                <div class="col-6">
+                    <label for="email_id" class="form-label">Email ID</label>
+                    <input type="text" class="form-control" name="email_id" placeholder="Email Id" value="{{ supplier.email_id}}"
+                        required><br>
+                </div>
+                
+                
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" value="Edit Supplier">Edit Supplier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2>Supplier Managment</h2>
+<div>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Supplier Managment</li>
+    </ol>
+    <a href="{{ url_for('add_supplier') }}" class="btn btn-primary active " role="button" data-bs-toggle="button"
+        aria-pressed="true">Add Supplier</a>
+</div>
+<div>
+
+    <h3>Supplier Managment</h3>
+
+
+    <table class="table table-bordered">
+
+        <thead>
+            <tr>
+                <th>Supplier Name</th>
+                <th>Contact No </th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Added on</th>
+                <th>Updated on</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for supply in supplier %}
+            <tr>
+                <td>{{ supply.supplier_name }}</td>
+                <td>{{ supply.address }}</td>
+                <td>{{ supply.contact_no}}</td>
+                <td>{{ supply.email_id}}</td>
+                <td>{{ supply.added_on}}</td>
+                <td>{{ supply.updated_on}}</td>
+                <td>
+                    <a class="btn btn-success" href="{{ url_for('edit_supplier', supplier_id=supply.supplier_id) }}"
+                        role="button">Edit</a>
+                    <a class="btn btn-danger" href="{{ url_for('delete_supplier',  supplier_id=supply.supplier_id) }}"
+                        role="button">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock body %}

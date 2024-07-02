@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <h2>Manage Users</h2>
+    <div>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('user_management')}}">User Management</a></li>
+            <li class="breadcrumb-item active">User Requests</li>
+        </ol>
+    </div>
+    <div>
+        <h3>User Request List</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usr in user_requests %}
+                    <tr>
+                        <td>{{ usr.name }}</td>
+                        <td>{{ usr.email }}</td>
+                        <td>{{ usr.password }}</td>
+                        <td>{{ usr.role }}</td>
+                        <td>
+                            <a class="btn btn-success" href="{{ url_for('accept_user', userid=usr.userid) }}" role="button">Accept</a>
+                            <a class="btn btn-danger" href="{{ url_for('reject_user', userid=usr.userid) }}" role="button" onclick="return confirm('Are you sure you want to delete this medicine?')">Reject</a>
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock body %}

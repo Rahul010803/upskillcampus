@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2>Medicine Purchase Managment</h2>
+<ol class="breadcrumb mb-4"> 
+    <li class="breadcrumb-item"><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ url_for('medicine_purchase')}}">Medicine Purchase Managment</a></li>
+    <li class="breadcrumb-item active">Edit Medicine Purchase</li>
+  </ol>
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="card-body">
+            <form class="row g-3" method="POST" action="{{ url_for('edit_purchase', purchase_id=purchases.purchase_id) }}">
+              
+                <div class="col-md-6">
+                    <label for="medicine_name" class="form-label">Medicine Name</label>
+                    <select id="medicine_name" class="form-select" name="medicine_name">
+                        <option selected>Select Medicine </option>
+                        {% for category_row in medicines %}
+                            {% for column_value in category_row %}
+                                <option value="{{ column_value }}">{{ column_value }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="supplier_name" class="form-label">Supplier Name</label>
+                    <select id="supplier_name" class="form-select" name="supplier_name">
+                        {% for category_row in suppliers %}
+                            {% for column_value in category_row %}
+                                <option value="{{ column_value }}">{{ column_value }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label for="quantity" class="form-label">Medicine Quantity</label>
+                    <input type="number" class="form-control" name="quantity" placeholder="Quantity"
+                        required>
+                </div>
+
+                <div class="col-6">
+                    <label for="price_per_unit" class="form-label">Purchase Price Per Unit</label>
+                    <input type="number" class="form-control" name="price_per_unit" placeholder="Purchase Price Per Unit"
+                        required>
+                </div>
+                
+                <div class="col-6">
+                    <label for="mfg_date" class="form-label">MFG Date</label>
+                    <input type="date" class="form-control" id="mfg_date" name="mfg_date" placeholder="MFG date"
+                        required>          
+                </div>
+
+                <div class="col-6">
+                    <label for="expiry_date" class="form-label">Expiry Date</label>
+                    <input type="date" class="form-control" id="expiry_date" name="expiry_date" placeholder="Expiry date">                  
+                </div>
+
+                <div class="col-md-6">
+                    <label for="batch_no" class="form-label">Medicine Batch  No.</label>
+                    <input type="text" class="form-control" name="batch_no" placeholder="Batch No"><br>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="sale_price" class="form-label">Sale Price Per Unit</label>
+                    <input type="number" class="form-control" name="sale_price" placeholder="Sale Price Per Unit"><br>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" value="Add Purchase">Edit Purchase</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

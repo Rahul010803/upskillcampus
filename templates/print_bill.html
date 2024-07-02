@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <h2>Bill</h2>
+    <div>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('billing')}}">Billing</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('add_bill')}}">New Bill</a></li>
+            <li class="breadcrumb-item active">Print Bill</li>
+        </ol>
+        <a href="{{ url_for('billing') }}" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true" >Billing</a>
+    </div>
+    <div class="container" id="bill-details" >
+        {% for bill in billing %}
+        <div class="header">
+            <h1>Medical Bill</h1>
+            <p>Invoice ID: {{ bill.bill_id }}</p>
+        </div>
+        <div class="patient-info">
+            <h2>Customer Information</h2>
+            <p><strong>Name:</strong> {{ bill.customer_name }}</p>
+            <p><strong>Doctor Name:</strong> {{ bill.doctor_name }}</p>
+        </div>
+        {% endfor %}
+        <div class="bill-details">
+            <h2>Bill Details</h2>
+            <table border="1px solid" cellpadding="5" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Unit Cost</th>
+                        <th>Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in bill_details %}
+                        <tr>
+                            <td>{{ detail.medicine_name }}</td>
+                            <td>{{ detail.quantity }}</td>
+                            <td>{{ detail.mrp_data }}</td>
+                            <td>{{ detail.total_cost }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% for bill in billing %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td> Total Amount: {{ bill.total_amount }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer">
+        <button onclick="printBill()" class="btn btn-primary">Print Bill</button>
+    </div>
+</body>
+
+<script>
+    function printBill() {
+        var content = document.getElementById('bill-details').innerHTML;
+        var printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>Print Bill</title></head><body>' + content + '<p>Thank you for choosing our services.</p></body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
+
+{% endblock body %}

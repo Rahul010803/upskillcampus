@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2>Edit Category</h2>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ url_for('medicine_purchase')}}">Medicine Purchase</a></li>
+    <li class="breadcrumb-item"><a href="{{ url_for('add_purchase')}}">Add Purchase</a></li>
+    <li class="breadcrumb-item active">Receipt</li>
+</ol>
+<div>
+
+    <h1>Receipt</h1>
+
+
+    <div class="container">
+        <div class="bill-details">
+            <h2>Bill Details</h2>
+            <table border="1px solid" cellpadding="5" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Unit Cost</th>
+                        <th>Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for receipt in receipts %}
+                    <tr>
+                        <td>{{ receipt.medicine_name }}</td>
+                        <td>{{ receipt.quantity }}</td>
+                        <td>{{ receipt.price_per_unit }}</td>
+                        <td>{{ receipt.total_cost }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td> Total Amount: {{ receipts|sum('total_cost') }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            {% for receipt in receipts %}
+            Total Cost in Ether {{ receipt.total_cost_in_ether }}
+            {% endfor %}
+
+        </div>
+        <div class="footer">
+            <p>Thank you for choosing our services.</p>
+        </div>
+    </div>
+    
+    <a href="{{ url_for('medicine_purchase')}}">Go back to Medicine Purchase</a>
+
+</div>
+{% endblock body %}
