@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+Game Level - {{ subject.name }}
+{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<div class="container">
+    <h1>{{ subject.name }} Quiz Levels</h1>
+    {% for level in levels %}
+        <div class="alert alert-success" role="alert">
+            <a href="{% url 'game_start' subject.name level.name %}" class="alert-link">{{ level.name }}</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

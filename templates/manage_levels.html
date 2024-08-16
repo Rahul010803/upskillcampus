@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Manage Levels{% endblock title %}
+{% block body %}
+<div class="container">
+    <h1>Manage Levels</h1>
+    <a type="button" class="btn btn-primary" href="{% url 'add_level' %}">Add New Level</a>
+    <h2>Existing Levels</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Difficulty</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if levels %}
+                {% for level in levels %}
+                <tr>
+                    <td>{{ level.name }}</td>
+                    <td>{{ level.difficulty }}</td>
+                    <td>
+                        <a class="btn btn-info" href="{% url 'update_level' level.id %}">Edit</a>
+                        <form method="POST" action="{% url 'delete_level' level.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3">No levels found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}

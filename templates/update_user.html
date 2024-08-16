@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Update User{% endblock title %}
+{% block body %}
+
+<div class="container">
+    <h1>Update User</h1>
+    <form method="POST" action="{% url 'update_user' user.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="is_staff" class="form-label">Staff Status</label>
+            <select id="is_staff" name="is_staff" class="form-select" required>
+                <option value="True" {% if user.is_staff %}selected{% endif %}>Yes</option>
+                <option value="False" {% if not user.is_staff %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update User</button>
+    </form>
+</div>
+
+{% endblock body %}

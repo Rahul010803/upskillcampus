@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Manage Level{% endblock title %}
+{% block body %}
+
+{% load static %}
+
+<style>
+  .form-control.custom-size {
+    width: 300px; /* Adjust width as needed */ 
+  }
+  .form-select.custom-size {
+    width: 300px; /* Adjust width as needed */ 
+  }
+</style>
+
+<div>
+  <h2 class="text-center mb-4">Add New Level</h2>
+  <form action="{% url 'add_level' %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="name" class="form-label">Level Name</label>
+      <input type="text" class="form-control custom-size" id="name" placeholder="Enter Level Name" name="name" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="difficulty" class="form-label">Difficulty</label>
+      <select class="form-select custom-size" id="difficulty" name="difficulty" required>
+        <option value="">Select Difficulty</option>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Level</button>
+  </form>
+</div>
+
+{% endblock body %}

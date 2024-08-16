@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block title %}
+Quiz Game - {{ subject.name }} - {{ level.name }}
+{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<div class="container">
+    <h1>{{ subject }} - {{ level }} Quiz</h1>
+
+    <!-- Timer Display -->
+    <div id="timer" class="text-center mb-4">
+        <h2>Time Remaining: <span id="times">01:00</span></h2>
+    </div>
+    
+
+    <!-- Start Quiz Button -->
+    <div id="start-container" class="text-center">
+        <form id="start-quiz-form" method="POST" action="">
+            {% csrf_token %}
+            <button type="submit" id="start-quiz" class="btn btn-primary">Start Quiz</button>
+        </form>
+    </div>
+
+    <!-- Quiz Questions -->
+    <div id="questions-container" class="mt-4" style="display: {% if questions %}block{% else %}none{% endif %};">
+        {% if questions %}
+            <form method="POST" action="{% url 'submit_quiz' subject.name level.name %}">
+                {% csrf_token %}
+                {% for question in questions %}
+                    <div class="question non-copiable">
+                        <h3>Question {{ forloop.counter }}: {{ question.question_text }}</h3>
+                        <ul>
+                            <li><input type="radio" name="question_{{ question.id }}" value="{{ question.option_1 }}"> {{ question.option_1 }}</li>
+                            <li><input type="radio" name="question_{{ question.id }}" value="{{ question.option_2 }}"> {{ question.option_2 }}</li>
+                            <li><input type="radio" name="question_{{ question.id }}" value="{{ question.option_3 }}"> {{ question.option_3 }}</li>
+                            <li><input type="radio" name="question_{{ question.id }}" value="{{ question.option_4 }}"> {{ question.option_4 }}</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success">Submit Quiz</button>
+            </form>
+        {% else %}
+            <p>No questions available for this quiz.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Hide the start button if the quiz has already started
+        if (document.querySelector('#questions-container').style.display === 'block') {
+            document.querySelector('#start-quiz').style.display = 'none';
+        }
+
+        // Timer functionality
+        let timeLimit = 5; // 2 minutes
+        let timerDisplay = document.getElementById('time');
+        let form = document.querySelector('#start-quiz-form');
+        
+
+        function formatTime(seconds) {
+            let minutes = Math.floor(seconds / 60);
+            let secondsRemaining = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(secondsRemaining).padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            let interval = setInterval(() => {
+                if (timeLimit <= 0) {
+                    clearInterval(interval);
+                    timerDisplay.textContent = "00:00";
+                    document.querySelector('form').submit(); // Automatically submit the form
+                } else {
+                    timerDisplay.textContent = formatTime(timeLimit);
+                    timeLimit--;
+                }
+            }, 1000);
+        }
+
+        // Start the timer when the quiz starts
+        document.getElementById('start-quiz').addEventListener('click', function () {
+            document.querySelector('#start-quiz').style.display = 'none';
+            document.querySelector('#questions-container').style.display = 'block';
+            startTimer();
+        });
+    });
+    
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Timer functionality for additional countdown
+        let additionalTimeLimit = 60; // 30 seconds in seconds
+        let additionalTimerDisplay = document.getElementById('times');
+        let submitButton = document.querySelector('button[class="btn btn-success"]');
+
+        function formatTime(seconds) {
+            let minutes = Math.floor(seconds / 60);
+            let secondsRemaining = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(secondsRemaining).padStart(2, '0')}`;
+        }
+
+        function startAdditionalTimer() {
+            let additionalInterval = setInterval(() => {
+                if (additionalTimeLimit <= 0) {
+                    clearInterval(additionalInterval);
+                    additionalTimerDisplay.textContent = "00:00";
+                    if (submitButton) {
+                        submitButton.click(); // Automatically click the submit button
+                    }
+                } else {
+                    additionalTimerDisplay.textContent = formatTime(additionalTimeLimit);
+                    additionalTimeLimit--;
+                }
+            }, 1000);
+        }
+
+        // Start the additional timer when the quiz starts
+        startAdditionalTimer(); // Start the additional timer
+        
+    });
+</script>
+
+
+{% endblock %}

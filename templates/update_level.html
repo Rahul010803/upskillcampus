@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Update Level{% endblock title %}
+{% block body %}
+
+<div>
+  <h2 class="text-center mb-4">Update Level</h2>
+  <form action="{% url 'update_level' level.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="level_id" value="{{ level.id }}">
+    <div class="mb-3">
+      <label for="name" class="form-label">Level Name</label>
+      <input type="text" class="form-control custom-size" id="name" placeholder="Enter Level Name" name="name" value="{{ level.name }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="difficulty" class="form-label">Difficulty</label>
+        <select class="form-select custom-size" id="difficulty" name="difficulty" required>
+          <option value="" disabled>Select Difficulty</option>
+          <option value="Easy" {% if level.difficulty == "Easy" %}selected{% endif %}>Easy</option>
+          <option value="Medium" {% if level.difficulty == "Medium" %}selected{% endif %}>Medium</option>
+          <option value="Hard" {% if level.difficulty == "Hard" %}selected{% endif %}>Hard</option>
+        </select>
+      </div>
+    <button type="submit" class="btn btn-primary">Update Level</button>
+  </form>
+</div>
+
+{% endblock body %}

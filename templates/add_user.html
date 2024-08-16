@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock title %}
+{% block body %}
+
+{% load static %}
+
+<style>
+  .form-control.custom-size {
+    width: 300px; /* Adjust width as needed */ 
+  }
+  .form-select.custom-size {
+    width: 300px; /* Adjust width as needed */ 
+  }
+</style>
+
+<div>
+  <h2 class="text-center mb-4">Add New User</h2>
+  <form action="{% url 'add_user' %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control custom-size" id="username" placeholder="Enter your username" name="username" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control custom-size" id="email" placeholder="Enter your email" name="email" required>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control custom-size" id="password" placeholder="Enter your password" name="password" required>
+    </div>
+    <div class="mb-3">
+      <label for="confirm-password" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control custom-size" id="confirm-password" placeholder="Confirm your password" name="confirm-password" required>
+    </div>
+    <div class="mb-3">
+      <label for="is_staff" class="form-label">Staff Status</label>
+      <select class="form-select custom-size" id="is_staff" name="is_staff" required>
+        <option value="True">Yes</option>
+        <option value="False">No</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add User</button>
+  </form>
+</div>
+
+{% endblock body %}

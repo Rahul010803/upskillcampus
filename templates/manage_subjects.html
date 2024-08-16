@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Manage Subjects{% endblock title %}
+{% block body %}
+<div class="container">
+    <h1>Manage Subjects</h1>
+    <a type="button" class="btn btn-primary" href="{% url 'add_subject' %}">Add New Subject</a>
+    <h2>Existing Subjects</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Icon link</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if subjects %}
+                {% for subject in subjects %}
+                <tr>
+                    <td>{{ subject.name }}</td>
+                    <td>{{ subject.icon }}</td>
+                    <td>{{ subject.description }}</td>
+                    <td>
+                        <a class="btn btn-info" href="{% url 'update_subject' subject.id %}">Edit</a>
+                        <form method="POST" action="{% url 'delete_subject' subject.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3">No subject found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}
